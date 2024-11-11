@@ -2,12 +2,13 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ title }}</title>
 </head>
 <body>
     <h1>{{ title }}</h1>
     <p>スタンプラリーの参加方法についての説明文をここに記載します。</p>
-    <img src="{{ url_for('static', filename='images/map.png') }}" alt="地図">
+    <img src="{{ url_for('static', filename='image/map_ikeda.jpg') }}" decoding="async" height="300" width="400" alt="スタンプラリーの参加方法">
     <button onclick="location.href='{{ url_for('main_menu') }}'">メインメニューに戻る</button>
 </body>
 </html>

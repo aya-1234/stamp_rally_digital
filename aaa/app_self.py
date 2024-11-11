@@ -1,6 +1,3 @@
-app.pyファイルの内容
-
-
 from flask import Flask, request, render_template, flash
 from init import db, Login, Checkpoint, Quiz, Quiz_Response, Stamp, Survey, Survey_Choice, Survey_Response
 import sqlite3

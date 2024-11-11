@@ -1,16 +1,67 @@
 {% extends "base.html" %}
 {% block content %}
-<h1>{{ title }}</h1>
-<form method="post">
+
+<div class="survey-container">
+  <h1>{{ title }}</h1>
+
+  <form method="post">
     {% for question in questions %}
-        <div>
-            <p>{{ question.question }}</p>
-            {% for choice in question.choices %}
-                <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}">
-                <label>{{ choice.survey_choice }}</label><br>
-            {% endfor %}
+      <div class="question">
+        <p class="question-text">{{ question.question }}</p>
+        <div class="choices">
+          {% for choice in question.choices %}
+            <label>
+              <input type="radio" name="question_{{ question.id }}" value="{{ choice.id }}">
+              <span>{{ choice.survey_choice }}</span>
+            </label><br>
+          {% endfor %}
         </div>
+      </div>
     {% endfor %}
-    <button type="submit">送信</button>
-</form>
+    <button type="submit" class="submit-button">送信</button>
+  </form>
+</div>
+
+<style>
+.survey-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
+
+.question {
+  margin-bottom: 20px;
+}
+
+.question-text {
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.choices label {
+  display: block; /* 各選択肢を縦に並べる */
+  margin-bottom: 5px;
+  cursor: pointer;
+}
+
+.choices input[type="radio"] {
+  margin-right: 5px;
+}
+
+.submit-button {
+  padding: 10px 20px;
+  background-color: #4CAF50; /* Green */
+  border: none;
+  color: white;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+</style>
 {% endblock %}

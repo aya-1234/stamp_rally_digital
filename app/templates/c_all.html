@@ -1,0 +1,7 @@
+<h1>cp地点</h1>
+<ul>
+    {% for checkpoint in checkpoints %}
+    <li><a href="/handle_checkpoint/{{ checkpoint.id }}">{{ checkpoint.name }}ログイン</a></li>
+    {% endfor %}
+    <a href="/">Back</a>
+</ul>

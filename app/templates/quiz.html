@@ -1,17 +1,59 @@
 <!DOCTYPE html>
 <html>
-<head><title>クイズ</title></head>
+<head>
+    <title>クイズ</title>
+    <style>
+        
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* ラベルとラジオボタンを中央揃え */
+            gap: 10px; /* ラジオボタン間の余白 */
+        }
+        label {
+            display: flex; /* ラベル全体をflexboxにする */
+            align-items: center; /* ラベルとラジオボタンを垂直方向に中央揃え */
+            cursor: pointer; /* ラベルクリックでも選択できるように */
+        }
+        input[type="radio"] {
+            margin-right: 10px; /* ラジオボタンとラベルの間に余白 */
+        }
+        button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        .message {
+            text-align: center;
+            margin-top: 20px;
+            color: #f00; /* エラーメッセージの色 */
+        }
+    </style>
+</head>
 <body>
     <h1>{{ quiz.content }}</h1>
     <form method="POST">
-        <input type="radio" name="answer" value="{{ quiz.answer_1 }}" required>{{ quiz.answer_1 }}<br>
-        <input type="radio" name="answer" value="{{ quiz.answer_2 }}" required>{{ quiz.answer_2 }}<br>
-        <input type="radio" name="answer" value="{{ quiz.answer_3 }}" required>{{ quiz.answer_3 }}<br>
+        <label><input type="radio" name="answer" value="{{ quiz.answer_1 }}" required>{{ quiz.answer_1 }}</label><br>
+        <label><input type="radio" name="answer" value="{{ quiz.answer_2 }}" required>{{ quiz.answer_2 }}</label><br>
+        <label><input type="radio" name="answer" value="{{ quiz.answer_3 }}" required>{{ quiz.answer_3 }}</label><br>
         <button type="submit">送信する</button>
     </form>
     {% with messages = get_flashed_messages() %}
         {% if messages %}
-            <p>{{ messages[0] }}</p>
+            <p class="message">{{ messages[0] }}</p>
         {% endif %}
     {% endwith %}
 </body>

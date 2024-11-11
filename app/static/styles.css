@@ -1,18 +1,21 @@
 /* styles.css */
-
+html{
+    font-size: calc(100vw / 390 * 16px); /* 390pxはiPhone 14の幅 */
+}
 body {
+    font-size: 1rem; /* ルート要素のフォントサイズと同じ */
     font-family: Arial, sans-serif;
-    background-color: #f5f5f5;
-    margin: 0;
-    padding: 0;
-    display: flex;
+    background-color: #ffffff;
+    margin: 20;
+    padding: 10;
+    display: 50%;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    max-height: auto;
 }
 
 .container {
-    max-width: 500px;
+    max-width: 90%;
     width: 100%;
     background-color: #fff;
     padding: 20px;
@@ -21,6 +24,7 @@ body {
 }
 
 h1, h2 {
+    font-size: 1.5rem; /* ルート要素の1.5倍 */
     color: #333;
 }
 
@@ -55,3 +59,93 @@ ul {
     list-style-type: none;
     padding: 0;
 }
+
+p{
+    font-size: 1.2rem; /* ルート要素の1.2倍 */
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 8px;
+    border: 1px solid #ddd;
+    text-align: left;
+}
+
+th {
+    background-color: #f2f2f2;
+    font-size: 100rem;
+}
+
+
+body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 1em;
+    background-color: #f0f0f0;
+    color: #333;
+}
+
+.container {
+    background-color: white;
+    padding: 1.5em;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 400px; /* Adjust as needed */
+    margin: 0 auto; /* Center the container */
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 1em;
+}
+
+.question {
+    margin-bottom: 1em;
+    font-weight: bold;
+}
+
+.options label {
+    display: block; /* Makes radio buttons stack vertically */
+    margin-bottom: 0.5em;
+    padding: 0.5em 1em;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+
+.options input[type="radio"] {
+   margin-right: 0.5em; /* Space between radio button and text*/
+}
+
+
+
+.options label:hover {
+    background-color: #e0e0e0;
+}
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 0.8em;
+    margin-top: 1em;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    text-align: center;
+}
+
+.back-link {
+    display: block;
+    margin-top: 1em;
+    text-align: center;
+    color: #007bff;
+    text-decoration: none;
+}
+

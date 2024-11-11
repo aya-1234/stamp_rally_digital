@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ログイン情報</title>
+        <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+        <style>
+            .container {
+                width: 90%; /* 画面幅に対する割合 */
+                max-width: 800px; /* 最大幅 */
+                margin: 0 auto; /* 中央寄せ */
+                padding: 20px;
+            }
+
+            .login-table {
+                width: 100%;
+                border-collapse: collapse; /* セルの線をまとめて表示 */
+                margin-top: 20px;
+            }
+
+            .login-table th,
+            .login-table td {
+                padding: 8px;
+                border: 1px solid #ddd;
+                text-align: left;
+            }
+
+            .login-table th {
+                background-color: #f2f2f2;
+            }
+
+            /* レスポンシブ対応 */
+            @media (max-width: 600px) {
+                .container {
+                    width: 95%;
+                    padding: 10px;
+                }
+            }
+        </style>
+</head>
+
+<body>
+
+<h1>ログイン情報</h1>
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>アカウント</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for login in logins %}
+            <tr>
+                <td>{{ login.id }}</td>
+                <td>{{ login.account }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+<br><a href="/">Back</a>
+
+</body>
+</html>
