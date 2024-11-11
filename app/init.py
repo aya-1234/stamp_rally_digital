@@ -78,7 +78,7 @@ class Survey_Response(db.Model):
 
 
 
-初期データを追加する関数
+#初期データを追加する関数
 # テストデータを追加する関数
 def initialize_db(app):
     db.init_app(app)

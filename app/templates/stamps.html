@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>スタンプ一覧</title>
+</head>
+<body>
+    <h1>スタンプ一覧</h1>
+    <ul>
+        {% for checkpoint in checkpoints %}
+            <li>{{ checkpoint.name }} - {% if checkpoint.id in user_stamps %}取得済み{% else %}未取得{% endif %}</li>
+        {% endfor %}
+    </ul>
+
+    {% if active_survey %}
+        <h2>アンケートに回答する</h2>
+        <ul>
+            {% for checkpoint in survey_checkpoints %}
+                <li>
+                    <a href="{{ url_for('goal_survey', user_id=user_id, checkpoint_id=checkpoint.id) }}">
+                        {{ checkpoint.name }}のアンケートに回答
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+
+    <a href="/">メインメニューに戻る</a>
+</body>
+</html>

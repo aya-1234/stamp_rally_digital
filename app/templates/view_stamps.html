@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>{{ title }}</title>
+    <style>
+        .unobtained {
+            color: gray;
+        }
+    </style>
+</head>
+<body>
+    <h1>{{ title }}</h1>
+    <ul>
+        {% for checkpoint in checkpoints %}
+            <li class="{% if not checkpoint.is_obtained %}unobtained{% endif %}">
+                {{ checkpoint.name }}
+            </li>
+        {% endfor %}
+    </ul>
+    <button onclick="location.href='{{ url_for('main_menu') }}'">メインメニューに戻る</button>
+</body>
+</html>
