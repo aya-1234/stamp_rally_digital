@@ -78,7 +78,6 @@ class Survey_Response(db.Model):
 
 
 
-初期データを追加する関数
 # テストデータを追加する関数
 def initialize_db(app):
     db.init_app(app)
@@ -222,6 +221,8 @@ def initialize_db(app):
 
 
 
- 
+
+
+
  #QUIZ_RESPONSEとSTAMP（一応作成した）とSURVEY＿RESPONSEは関連集合だから要らない。(必要に応じてどうぞ。）
 
