@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>ユーザー情報編集</title>
+</head>
+<body>
+    <h1>{{ user.name }} さんの情報</h1>  <!-- ユーザー名を表示 -->
+
+    <h2>スタンプ情報</h2>
+    <form method="post">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>チェックポイントID</th>
+                    <th>日時</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for stamp in stamps %}
+                <tr>
+                    <td>{{ stamp.id }}</td>
+                    <td>
+                        <input type="number"　title='stamp_checkpoint' name="stamp_checkpoint_{{ stamp.id }}" value="{{ stamp.checkpoint_id }}">
+                    </td>
+                    <td>{{ stamp.created_at }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <h2>クイズ回答情報</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>クイズID</th>
+                    <th>回答</th>
+                    <th>正誤</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for quiz_response in quiz_responses %}
+                <tr>
+                    <td>{{ quiz_response.id }}</td>
+                    <td>{{ quiz_response.quiz_id }}</td>
+                    <td>{{ quiz_response.response }}</td>
+                    <td>
+                        <input type="checkbox" title="quiz_tf" name="quiz_is_corrected_{{ quiz_response.id }}" value="true" {% if quiz_response.is_corrected %}checked{% endif %}>
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+        <button type="submit">更新</button>
+    </form>
+
+    <a href="{{ url_for('admin') }}">管理画面に戻る</a>
+</body>
+</html>
