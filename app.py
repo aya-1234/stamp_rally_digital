@@ -46,8 +46,27 @@ def index():
                            other_links=[
                                         {"url": "/admin", "text": "user検索メニュー"},
                                         {"url": "/logins", "text": "ログイン"},
-                                        {"url": url_for('login', checkpoint_id=1), "text": "ログイン (チェックポイント1)"},
-                                        {"url": url_for('login', checkpoint_id=2), "text": "ログイン (チェックポイント2)"},
+                                        {"url": "/c_all", "text": "chackpoint_all"},
+                           ])
+
+@ app.route("/c_all")
+def c_all():
+    enquiry_list = [
+         {"key": key, "title": value[0]} for key, value in enquirely.items()
+         ]
+    return render_template("index.html",
+                           enquiry_list=enquiry_list,
+                           title=enquirely,
+                           other_links=[
+                            {"url": url_for('login', checkpoint_id=1), "text": "スタート地点"},
+                            {"url": url_for('login', checkpoint_id=2), "text": "ログイン (チェックポイント1)"},
+                            {"url": url_for('login', checkpoint_id=3), "text": "ログイン (チェックポイント2)"},
+                            {"url": url_for('login', checkpoint_id=4), "text": "ログイン (チェックポイント3)"},
+                            {"url": url_for('login', checkpoint_id=5), "text": "ログイン (チェックポイント4)"},
+                            {"url": url_for('login', checkpoint_id=6), "text": "ログイン (チェックポイント5)"},
+                            {"url": url_for('login', checkpoint_id=7), "text": "ログイン (チェックポイント6)"},
+                            {"url": url_for('login', checkpoint_id=8), "text": "ログイン (チェックポイント7)"},
+                            {"url": url_for('login', checkpoint_id=9), "text": "ゴール地点"},
                            ])
 
 @app.route('/logins', methods=['GET'])
