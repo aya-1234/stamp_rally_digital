@@ -2,14 +2,85 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <title>{{ title }}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>メインメニュー</title>
+    <style>
+        /* タブのスタイル */
+        .tabs {
+            display: flex;
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .tab {
+            padding: 10px 20px;
+            border: 1px solid #ccc;
+            cursor: pointer;
+            background-color: #f0f0f0;
+        }
+        .tab.active {
+            background-color: #fff;
+            border-bottom: none;
+        }
+
+        /* コンテンツのスタイル */
+        .content {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 10px;
+            display: none; /* 最初は非表示 */
+        }
+        .content.active {
+            display: block; /* アクティブなタブのコンテンツを表示 */
+        }
+        .li{
+            width: auto;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ title }}</h1>
-    <ul>
-        <li><a href="{{ url_for('participation_guide') }}">スタンプラリーの参加方法</a></li>
-        <li><a href="{{ url_for('app_usage') }}">スタンプラリーアプリの使い方</a></li>
-        <li><a href="{{ url_for('view_stamps') }}">ゲット済みのスタンプを確認する</a></li>
+
+    <h1>メインメニュー</h1>
+
+    <ul class="tabs">
+        <li class="tab active" data-tab="tab1">スタンプ<br>ラリーの<br>参加方法</li>
+        <li class="tab" data-tab="tab2">スタンプラリー<br>アプリの使い方</li>
+        <li class="tab" data-tab="tab3">ゲット済みの<br>スタンプを<br>確認</li>
     </ul>
+
+    <div class="content active" id="tab1">
+        <h2>スタンプラリーの参加方法</h2>
+        <p>ここにスタンプラリーの参加方法を記述します。</p>
+        <img src="image/map_ikeda.png" alt="地図" width="400" height="300" decoding="async">
+    </div>    
+    <div class="content" id="tab2">
+        <h2>スタンプラリーアプリの使い方</h2>
+        <p>ここにスタンプラリーアプリの使い方を記述します。</p>
+    </div>
+    <div class="content" id="tab3">
+        <h2>ゲット済みのスタンプを確認する</h2>
+                <p>ここにゲット済みのスタンプを表示します。</p>
+    </div>
+
+
+    <script>
+        const tabs = document.querySelectorAll('.tab');
+        const contents = document.querySelectorAll('.content');
+
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // 全てのタブとコンテンツを非アクティブにする
+                tabs.forEach(t => t.classList.remove('active'));
+                contents.forEach(c => c.classList.remove('active'));
+
+                // クリックされたタブと対応するコンテンツをアクティブにする
+                tab.classList.add('active');
+                const targetContentId = tab.dataset.tab; // data-tab属性の値を取得
+                const targetContent = document.getElementById(targetContentId);
+                targetContent.classList.add('active');
+            });
+        });
+    </script>
+
 </body>
 </html>

@@ -1,92 +1,11 @@
-/* styles.css */
-html{
-    font-size: calc(100vw / 390 * 16px); /* 390pxはiPhone 14の幅 */
-}
+/* style.css */
 body {
-    font-size: 1rem; /* ルート要素のフォントサイズと同じ */
     font-family: Arial, sans-serif;
-    background-color: #ffffff;
-    margin: 20;
-    padding: 10;
-    display: 50%;
-    justify-content: center;
-    align-items: center;
-    max-height: auto;
-}
-
-.container {
-    max-width: 90%;
-    width: 100%;
-    background-color: #fff;
-    padding: 20px;
-    box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-}
-
-h1, h2 {
-    font-size: 1.5rem; /* ルート要素の1.5倍 */
-    color: #333;
-}
-
-button {
-    background-color: #007bff;
-    color: white;
-    padding: 10px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    width: 100%;
-}
-
-button:hover {
-    background-color: #0056b3;
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-}
-
-input[type="text"] {
-    padding: 10px;
-    margin-top: 5px;
-    margin-bottom: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-}
-
-ul {
-    list-style-type: none;
-    padding: 0;
-}
-
-p{
-    font-size: 1.2rem; /* ルート要素の1.2倍 */
-}
-
-table {
-    width: 100%;
-    border-collapse: collapse;
-}
-
-th, td {
-    padding: 8px;
-    border: 1px solid #ddd;
-    text-align: left;
-}
-
-th {
-    background-color: #f2f2f2;
-    font-size: 100rem;
-}
-
-
-body {
-    font-family: sans-serif;
     margin: 0;
     padding: 1em;
     background-color: #f0f0f0;
     color: #333;
+    font-size: calc(100vw / 390 * 16px); /* iPhone 14ベースのフォントサイズ */
 }
 
 .container {
@@ -94,8 +13,8 @@ body {
     padding: 1.5em;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    max-width: 400px; /* Adjust as needed */
-    margin: 0 auto; /* Center the container */
+    max-width: 800px; /* 必要に応じて調整 */
+    margin: 0 auto; /* 中央寄せ */
 }
 
 h1 {
@@ -103,49 +22,48 @@ h1 {
     margin-bottom: 1em;
 }
 
-.question {
-    margin-bottom: 1em;
-    font-weight: bold;
+/* タブのスタイル */
+.tabs {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
 }
 
-.options label {
-    display: block; /* Makes radio buttons stack vertically */
-    margin-bottom: 0.5em;
-    padding: 0.5em 1em;
+.tab-button {
+    padding: 10px 20px;
     border: 1px solid #ccc;
-    border-radius: 4px;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    background-color: #f0f0f0;
+    margin: 0 5px;
 }
 
-
-.options input[type="radio"] {
-   margin-right: 0.5em; /* Space between radio button and text*/
+.tab-button.active {
+    background-color: #ddd;
 }
 
-
-
-.options label:hover {
-    background-color: #e0e0e0;
+.tab-content {
+    display: none;
+    padding: 20px;
+    border: 1px solid #ccc;
 }
-.submit-button {
+
+.tab-content.active {
     display: block;
-    width: 100%;
-    padding: 0.8em;
-    margin-top: 1em;
-    background-color: #4CAF50;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    text-align: center;
 }
 
-.back-link {
-    display: block;
-    margin-top: 1em;
-    text-align: center;
-    color: #007bff;
-    text-decoration: none;
+/* その他のスタイル */
+p {
+    font-size: 1.2rem;
 }
 
+img {
+    max-width: 100%; /* 画像がコンテナからはみ出さないように */
+    height: auto;
+}
+
+/* 必要に応じてレスポンシブデザインを追加 */
+@media (max-width: 600px) {
+    .container {
+        max-width: 95%;
+    }
+}

@@ -4,10 +4,64 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{{ checkpoint.name }}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* style.css */
+        .body {
+            font-family: sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f0f0f0;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh; /* 画面の高さいっぱい */
+            padding: 20px;
+        }
+
+        .title-banner {
+            background-color: #007bff; /* 帯の色 */
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .description-box {
+            border: 1px solid #ccc;
+            padding: 20px;
+            margin-top: 20px;
+            margin-bottom: 20px; /* 送信ボタンとの間隔 */
+            flex-grow: 1; /* 説明文エリアを伸縮させる */
+        }
+
+        .quiz-button {
+            display: block; /* 画面幅いっぱいに表示 */
+            background-color: #4CAF50;
+            color: white;
+            padding: 20px;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 1.2em;
+        }
+
+        .quiz-button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
 <body>
-    <h1>{{ checkpoint.name }}</h1>
-    <p>{{ checkpoint.description }}</p>
-    <a href="{{ url_for('quiz', checkpoint_id=checkpoint.id) }}">クイズに回答する</a>
+    <div class="container">
+        <div class="title-banner">
+            <h1>{{ checkpoint.name }}</h1>
+        </div>
+        <div class="description-box">
+            <p>{{ checkpoint.description }}</p>
+        </div>
+        <a class="quiz-button" href="{{ url_for('quiz', checkpoint_id=checkpoint.id) }}">クイズに回答する</a>
+    </div>
+    
 </body>
 </html>

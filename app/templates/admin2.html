@@ -2,62 +2,143 @@
 <html lang="ja">
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ユーザー情報編集</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <style>
+        /* styles.css */
+.body {
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: 16px; /* 基本フォントサイズ */
+}
+
+.container {
+    max-width: 800px;
+    width: 100%;
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.title-banner {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+    border-radius: 8px 8px 0 0;
+    margin-bottom: 20px; /* 見出しと表の間にスペースを設ける */
+}
+
+.stamp-section, .quiz-section {
+  margin-bottom: 20px;
+}
+
+.stamp-table, .quiz-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 10px;
+}
+
+.stamp-table th, .quiz-table th, .stamp-table td, .quiz-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+    text-align: left;
+}
+
+.stamp-table th, .quiz-table th {
+    background-color: #f2f2f2;
+}
+
+.submit-area {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.back-link {
+    display: inline-block;
+    margin-left: 20px;
+    color: #007bff;
+    text-decoration: none;
+}
+
+
+/* レスポンシブデザイン（必要に応じて調整） */
+@media (max-width: 600px) {
+    .container {
+        max-width: 95%;
+    }
+}
+    </style>
 </head>
 <body>
-    <h1>{{ user.name }} さんの情報</h1>  <!-- ユーザー名を表示 -->
+    <div class="container">
+        <header class="title-banner">
+            <h1>{{ account }} さんの情報</h1>
+        </header>
 
-    <h2>スタンプ情報</h2>
-    <form method="post">
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>チェックポイントID</th>
-                    <th>日時</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for stamp in stamps %}
-                <tr>
-                    <td>{{ stamp.id }}</td>
-                    <td>
-                        <input type="number"　title='stamp_checkpoint' name="stamp_checkpoint_{{ stamp.id }}" value="{{ stamp.checkpoint_id }}">
-                    </td>
-                    <td>{{ stamp.created_at }}</td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <section class="stamp-section">
+            <h2>スタンプ情報</h2>
+            <table class="stamp-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>チェックポイントID</th>
+                        <th>日時</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for stamp in stamps %}
+                        <tr>
+                            <td>{{ stamp.id }}</td>
+                            <td>
+                                <input type="number" title='stamp_checkpoint' name="stamp_checkpoint_{{ stamp.id }}" value="{{ stamp.checkpoint_id }}" required>
+                            </td>
+                            <td>{{ stamp.created_at }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
 
-        <h2>クイズ回答情報</h2>
-        <table>
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>クイズID</th>
-                    <th>回答</th>
-                    <th>正誤</th>
-                </tr>
-            </thead>
-            <tbody>
-                {% for quiz_response in quiz_responses %}
-                <tr>
-                    <td>{{ quiz_response.id }}</td>
-                    <td>{{ quiz_response.quiz_id }}</td>
-                    <td>{{ quiz_response.response }}</td>
-                    <td>
-                        <input type="checkbox" title="quiz_tf" name="quiz_is_corrected_{{ quiz_response.id }}" value="true" {% if quiz_response.is_corrected %}checked{% endif %}>
-                    </td>
-                </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+        <section class="quiz-section">
+            <h2>クイズ回答情報</h2>
+            <table class="quiz-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>クイズID</th>
+                        <th>回答</th>
+                        <th>正誤</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for quiz_response in quiz_responses %}
+                        <tr>
+                            <td>{{ quiz_response.id }}</td>
+                            <td>{{ quiz_response.quiz_id }}</td>
+                            <td>{{ quiz_response.response }}</td>
+                            <td>
+                                <input type="checkbox" name="quiz_is_corrected_{{ quiz_response.id }}" value="true" {% if quiz_response.is_corrected %}checked{% endif %}" required>
+                            </td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </section>
 
-        <button type="submit">更新</button>
-    </form>
-
-    <a href="{{ url_for('admin') }}">管理画面に戻る</a>
+        <div class="submit-area">
+            <button type="submit" form="user-edit-form">更新</button>
+            <a href="{{ url_for('admin') }}" class="back-link">管理画面に戻る</a>
+        </div>
+    </div>
+</form>
 </body>
 </html>

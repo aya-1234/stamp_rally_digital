@@ -19,6 +19,12 @@ app.secret_key = os.urandom(24)
 
 initialize_db(app)
 
+enquirely = {  # 辞書として定義
+    "enquiry1": ["Enquiry 1 Title", "Other data"],
+    "enquiry2": ["Enquiry 2 Title", "More data"], # 必要に応じて追加
+    # ...
+}
+
 @app.teardown_appcontext
 def shutdown_session(exception=None):
     if exception:
@@ -29,19 +35,45 @@ def get_all_logins():
     return db.session.query(Login).all() 
 
 
+# @app.route('/')
+# def hello():
+#     output='''
+#     <h1>backdoor</h1>
+#     <ul>
+#         <li><a href="/admin">user検索メニュー</a></li>
+#         <li><a href="/logins">ログイン</a></li>
+#         <li><a href="/c_all">cp_all</a></li>
+#     </ul>
+#                            '''
+#     return output
+
+
 @ app.route("/")
-def index():
+def backdoor():
     enquiry_list = [
-         {"key": key, "title": value[0]} for key, value in enquirely.items()
-         ]
+        {"key": key, "title": value[0]} for key, value in enquirely.items()
+        ]
     return render_template("index.html",
                            enquiry_list=enquiry_list,
-                           title=enquirely,
-                           other_links=[
-                                        {"url": "/admin", "text": "user検索メニュー"},
-                                        {"url": "/logins", "text": "ログイン"},
-                                        {"url": "/c_all", "text": "chackpoint_all"},
+                           backdoor = enquirely,
+                           other_links = [
+                            {"url": url_for('admin'), "text": "user検索メニュー"},
+                            {"url": url_for('show_logins'), "text": "ログイン"},
+                            {"url": url_for('c_all'), "text": "checkpoint_all"}, # url_for を使う
+                            {"url": url_for('main_menu'), "text": "メニュー"},
+                            {"url": url_for('survey'), "text": "survey"},
                            ])
+                        
+
+@app.route('/survey')
+def servey():
+    return render_template("survey.html")
+
+@app.route('/mein')
+def mein():
+    if some_condition:
+        return "Condition is true"
+    return "Condition is false" # ifの外にreturn文を追加
 
 @ app.route("/c_all")
 def c_all():
@@ -434,37 +466,24 @@ def goal():
 
 
 
-@ app.route('/admin', methods=['GET', 'POST'])
+@app.route('/admin', methods=['GET', 'POST'])
 def admin():
-
+    
     if request.method == 'POST':
-        account_name = request.form.get('account')
-        if account_name:
-            # Accountモデルから検索
-            # first()を追加
-            db.session.query(Login).filter_by(account=account_name)
-            #account = login.query(login).filter_by(account=account_name).first()
-            if account_name:
-                # 関連するStampデータを取得
-                stamps = Stamp.query.filter_by(login_id=account_name).all()  # relationshipを利用
-                return render_template('admin.html',
-                                       account=account_name,  # accountオブジェクトを渡す
-                                       stamps=stamps,    # stampsオブジェクトを渡す
-                                       search_results=True)
-            else:
-                return render_template('admin.html',
-                                       error="ユーザーが見つかりません",
-                                       search_results=False)
-        else:
-            return render_template('admin.html',
-                                   error="アカウント名を入力してください",
-                                   search_results=False)
+        account = request.form['account']
+        user = Login.query.filter_by(account=account).first()
+
+        # アカウント存在チェック
+        if not user:
+            flash("アカウントが間違っています", 'error')
+            return render_template('login.html', title="ログイン")
+
+        # アカウントが見つかった場合、処理を追加...
+        # 例: スタンプ情報を取得してテンプレートに渡すなど
+        return render_template('admin2.html', user=user, search_results=True)
 
     else:  # GETリクエストの場合
         return render_template('admin.html', search_results=False)
-
-
-
 
 if __name__ == "__main__":
     app.run(debug=True, port=8888, threaded=True)

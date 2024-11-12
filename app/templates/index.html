@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Enquiry</title>
+    <title>backdoor</title>
     <style>
         body {
             font-family: sans-serif;
@@ -77,24 +77,18 @@
     </style>
 </head>
 <body>
-<div class="container">
-    <h1>back_door</h1>
+    <h1>backdoor</h1>
+
+    <body>
+
+        <h2>Backdoor Data:</h2>
         <ul>
-            {% for item in other_links %}
-                <li><a href="{{ item['url'] }}">{{ item['text'] }}</a></li>
+            {% for link in other_links %}
+            <li><a href="{{ link.url }}">{{ link.text }}</a></li>
             {% endfor %}
         </ul>
-        <a href="/">Back</a>
-    <div class="question">
-    </div>
-        {% if key %}
-        {{ title[key][0] }}
-        {% endif %}
-    </div>
+    
+<a href="/">Back</a>
 
-
-
-
-<br>
 </body>
 </html>

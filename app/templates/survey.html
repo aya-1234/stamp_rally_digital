@@ -1,9 +1,123 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>title</title>
+<style>
+  /* style.css */
+.body {
+    font-family: sans-serif;
+    background-color: #f5f5f5;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    font-size: calc(100vw / 390 * 16px);
+}
+
+.container {
+    max-width: 600px;
+    width: 100%;
+    background-color: #fff;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.title-banner {
+    background-color: #007bff;
+    color: white;
+    padding: 15px;
+    text-align: center;
+}
+
+.question-area {
+    margin-bottom: 15px;
+}
+
+.question-text {
+    font-size: 1.4em;
+    line-height: 1.6; /* 行間隔 */
+}
+
+.options {
+    margin-bottom: 20px; /* 下にスペース */
+}
+
+
+.option-label {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1.3em;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.option-label:hover {
+    background-color: #e0e0e0;
+}
+
+.option-label input[type="radio"] {
+    margin-right: 10px;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.message {
+    font-size: 1.4em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 15px;
+    color: #dc3545; /* エラーメッセージの色 */
+}
+
+@media (max-width: 400px) {
+    .container {
+        max-width: 95%;
+    }
+}
+/* タイトル帯のスタイル */
+.title-banner {
+    background-color: #007bff; /* 例: 青 */
+    color: white;
+    padding: 15px;
+    text-align: center;
+    margin-bottom: 20px; /* タイトルとフォームの間にスペース */
+    border-radius: 8px 8px 0 0; /* 上下の角を丸める */
+}
+</style>
+
+</head>
+<body>
+  {% extends "base.html" %}
 {% block content %}
 
-<div class="survey-container">
+<header class="title-banner">
   <h1>{{ title }}</h1>
-
+</header>
   <form method="post">
     {% for question in questions %}
       <div class="question">
@@ -21,47 +135,6 @@
     <button type="submit" class="submit-button">送信</button>
   </form>
 </div>
-
-<style>
-.survey-container {
-  max-width: 600px;
-  margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-}
-
-.question {
-  margin-bottom: 20px;
-}
-
-.question-text {
-  font-weight: bold;
-  margin-bottom: 10px;
-}
-
-.choices label {
-  display: block; /* 各選択肢を縦に並べる */
-  margin-bottom: 5px;
-  cursor: pointer;
-}
-
-.choices input[type="radio"] {
-  margin-right: 5px;
-}
-
-.submit-button {
-  padding: 10px 20px;
-  background-color: #4CAF50; /* Green */
-  border: none;
-  color: white;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
-  font-size: 16px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-</style>
 {% endblock %}
+</body>
+</html>

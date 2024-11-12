@@ -1,60 +1,91 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>クイズ</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
     <style>
-        
-        body {
-            font-family: sans-serif;
-            margin: 20px;
-        }
-        h1 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        form {
-            display: flex;
-            flex-direction: column;
-            align-items: center; /* ラベルとラジオボタンを中央揃え */
-            gap: 10px; /* ラジオボタン間の余白 */
-        }
-        label {
-            display: flex; /* ラベル全体をflexboxにする */
-            align-items: center; /* ラベルとラジオボタンを垂直方向に中央揃え */
-            cursor: pointer; /* ラベルクリックでも選択できるように */
-        }
-        input[type="radio"] {
-            margin-right: 10px; /* ラジオボタンとラベルの間に余白 */
-        }
-        button {
-            padding: 10px 20px;
-            background-color: #4CAF50;
-            color: white;
-            border: none;
-            cursor: pointer;
-        }
-        button:hover {
-            background-color: #45a049;
-        }
-        .message {
-            text-align: center;
-            margin-top: 20px;
-            color: #f00; /* エラーメッセージの色 */
-        }
+        /* style.css */
+.body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.title-banner {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.quiz-form {
+    border: 1px solid #ccc;
+    padding: 20px;
+    margin-top: 20px;
+    flex-grow: 1; /* フォームエリアを伸縮させる */
+}
+
+.options-label {
+    display: block; /* ラベルを縦に並べる */
+    margin-bottom: 10px;
+}
+
+.submit-button {
+    display: block;
+    width: 100%;
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 1.2em;
+    margin-top: 20px;
+}
+
+.submit-button:hover {
+    background-color: #45a049;
+}
+
+.message {
+    font-size: 1.5em;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 20px;
+    color: #f00; /* メッセージの色 (必要に応じて変更) */
+}
     </style>
 </head>
 <body>
-    <h1>{{ quiz.content }}</h1>
-    <form method="POST">
-        <label><input type="radio" name="answer" value="{{ quiz.answer_1 }}" required>{{ quiz.answer_1 }}</label><br>
-        <label><input type="radio" name="answer" value="{{ quiz.answer_2 }}" required>{{ quiz.answer_2 }}</label><br>
-        <label><input type="radio" name="answer" value="{{ quiz.answer_3 }}" required>{{ quiz.answer_3 }}</label><br>
-        <button type="submit">送信する</button>
-    </form>
-    {% with messages = get_flashed_messages() %}
+    <div class="container">
+        <div class="title-banner">
+            <h1>{{ quiz.content }}</h1>
+        </div>
+        {% with messages = get_flashed_messages() %}
         {% if messages %}
             <p class="message">{{ messages[0] }}</p>
         {% endif %}
-    {% endwith %}
+        {% endwith %}
+        <form method="POST" class="quiz-form">
+            <div class="options">
+                <label><input type="radio" name="answer" value="{{ quiz.answer_1 }}" required>{{ quiz.answer_1 }}</label>
+                <label><input type="radio" name="answer" value="{{ quiz.answer_2 }}" required>{{ quiz.answer_2 }}</label>
+                <label><input type="radio" name="answer" value="{{ quiz.answer_3 }}" required>{{ quiz.answer_3 }}</label>
+            </div>
+            <button type="submit" class="submit-button">送信する</button>
+        </form>
+
+
+    </div>
 </body>
 </html>

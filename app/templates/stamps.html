@@ -1,29 +1,110 @@
 <!DOCTYPE html>
-<html>
+<html lang="ja">
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>スタンプ一覧</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <style>
+        /* style.css */
+.body {
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0;
+}
+
+.container {
+    padding: 20px;
+}
+
+.title-banner {
+    background-color: #007bff;
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+.stamp-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+}
+
+.stamp-table th,
+.stamp-table td {
+    padding: 10px;
+    border: 1px solid #ccc;
+    text-align: left;
+}
+
+.stamp-table th {
+    background-color: #f2f2f2;
+}
+
+.stamp-table tr.acquired {
+    background-color: #c3e6cb; /* 取得済みの背景色 */
+}
+
+.stamp-table tr.unacquired {
+    background-color: #f5c6cb; /* 未取得の背景色 */
+}
+
+.survey-list {
+    list-style: none;
+    padding: 0;
+    margin-top: 20px;
+}
+
+.survey-button {
+    display: block;
+    padding: 15px;
+    background-color: #007bff;
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    transition: background-color 0.3s ease; /* ホバー時の変化をスムーズに */
+}
+
+.survey-button:hover {
+    background-color: #0056b3;
+}
+    </style>
 </head>
 <body>
-    <h1>スタンプ一覧</h1>
-    <ul>
-        {% for checkpoint in checkpoints %}
-            <li>{{ checkpoint.name }} - {% if checkpoint.id in user_stamps %}取得済み{% else %}未取得{% endif %}</li>
-        {% endfor %}
-    </ul>
+    <div class="container">
+        <div class="title-banner">
+            <h1>スタンプ一覧</h1>
+        </div>
 
-    {% if active_survey %}
+        <table class="stamp-table">
+            <thead>
+                <tr>
+                    <th>スタンプ</th>
+                    <th>状態</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for checkpoint in checkpoints %}
+                    <tr class="{% if checkpoint.id in user_stamps %}acquired{% else %}unacquired{% endif %}">
+                        <td>{{ checkpoint.name }}</td>
+                        <td>{% if checkpoint.id in user_stamps %}取得済み{% else %}未取得{% endif %}</td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
         <h2>アンケートに回答する</h2>
-        <ul>
-            {% for checkpoint in survey_checkpoints %}
+        <ul class="survey-list">
+            {% for checkpoint in checkpoints %}
                 <li>
-                    <a href="{{ url_for('goal_survey', user_id=user_id, checkpoint_id=checkpoint.id) }}">
+                    <a class="survey-button" href="{{ url_for('goal_survey', user_id=user_id, checkpoint_id=checkpoint.id) }}">
                         {{ checkpoint.name }}のアンケートに回答
                     </a>
                 </li>
             {% endfor %}
         </ul>
-    {% endif %}
-
-    <a href="/">メインメニューに戻る</a>
+    </div>
 </body>
 </html>
